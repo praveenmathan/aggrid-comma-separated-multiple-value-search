@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>React example</title>
+    <meta charSet="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style media="only screen">
+        html,
+        body,
+        #root {
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            box-sizing: border-box;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        html {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 0;
+            overflow: auto;
+        }
+
+        body {
+            padding: 1rem;
+            overflow: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root">Loading React example…</div>
+    <script>
+        var appLocation = './';
+        var boilerplatePath = '';
+        var systemJsMap = {
+            "@ag-grid-community/react": "https://cdn.jsdelivr.net/npm/@ag-grid-community/react@29.3.5/",
+            "@ag-grid-community/styles": "https://cdn.jsdelivr.net/npm/@ag-grid-community/styles@29.3.5",
+            "ag-grid-community": "https://cdn.jsdelivr.net/npm/ag-grid-community@29.3.5",
+            "ag-grid-enterprise": "https://cdn.jsdelivr.net/npm/ag-grid-enterprise@29.3.5/",
+            "ag-grid-react": "https://cdn.jsdelivr.net/npm/ag-grid-react@29.3.5/"
+        };
+        var systemJsPaths = {
+            "@ag-grid-community/client-side-row-model": "https://cdn.jsdelivr.net/npm/@ag-grid-community/client-side-row-model@29.3.5/dist/client-side-row-model.cjs.min.js",
+            "@ag-grid-community/core": "https://cdn.jsdelivr.net/npm/@ag-grid-community/core@29.3.5/dist/core.cjs.min.js",
+            "@ag-grid-community/csv-export": "https://cdn.jsdelivr.net/npm/@ag-grid-community/csv-export@29.3.5/dist/csv-export.cjs.min.js",
+            "@ag-grid-community/infinite-row-model": "https://cdn.jsdelivr.net/npm/@ag-grid-community/infinite-row-model@29.3.5/dist/infinite-row-model.cjs.min.js"
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/systemjs@0.19.47/dist/system.js">
+    </script>
+    <script src="system.config.js">
+    </script>
+    <script>System.import('./index.jsx').catch(function (err) { console.error(err); });</script>
+</body>
+
+</html>
