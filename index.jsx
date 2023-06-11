@@ -37,6 +37,7 @@ const GridExample = () => {
             filter: 'agTextColumnFilter',
             filterParams: {
                 buttons: ['clear', 'apply'],
+                maxNumConditions: 10
             },
         },
         {
@@ -54,6 +55,7 @@ const GridExample = () => {
         { field: 'bronze', filter: 'agNumberColumnFilter' },
         { field: 'total', filter: 'agNumberColumnFilter' },
     ]);
+
     const defaultColDef = useMemo(() => {
         return {
             flex: 1,
@@ -91,23 +93,23 @@ const GridExample = () => {
     }, []);
 
     const onClickFilterSearch = (e) => {
-        const v = inputRef.current.value;
-        console.log('v :', v);
+        const inputFromSearch = inputRef.current.value;
+        const inputFromSearchArr = inputFromSearch.split(',').map((value) => value.trim())
+        console.log('inputFromSearchArr', inputFromSearchArr);
+
+        const conditionToFilter = inputFromSearchArr.map(item => {
+            const formObj2 = {
+                filterType: 'text',
+                type: 'equals',
+                filter: item
+            }
+            return formObj2;
+        });
+        console.log('conditionTofilter', conditionToFilter);
         const formObj = {
             filterType: 'text',
             operator: 'OR',
-            conditions: [
-                {
-                    filterType: 'text',
-                    type: 'equals',
-                    filter: 'australia'
-                },
-                {
-                    filterType: 'text',
-                    type: 'equals',
-                    filter: 'norway'
-                }
-            ]
+            conditions: conditionToFilter
         }
         const countryFilterComponent = gridApi.getFilterInstance('country');
         console.log('gridAPI filter instance', countryFilterComponent);
@@ -121,6 +123,7 @@ const GridExample = () => {
     };
 
     const onResetFilterSearch = (e) => {
+        inputRef.current.value = '';
         const countryFilterComponent = gridApi.getFilterInstance('country');
         countryFilterComponent.setModel(null);
         gridApi.onFilterChanged();
@@ -142,9 +145,6 @@ const GridExample = () => {
                     columnDefs={columnDefs}
                     defaultColDef={defaultColDef}
                     onGridReady={onGridReady}
-                    onFilterOpened={onFilterOpened}
-                    onFilterChanged={onFilterChanged}
-                    onFilterModified={onFilterModified}
                 ></AgGridReact>
             </div>
         </div>
